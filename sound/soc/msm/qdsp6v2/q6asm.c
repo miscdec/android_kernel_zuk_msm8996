@@ -5807,6 +5807,13 @@ static int __q6asm_media_format_block_pcm_v4(struct audio_client *ac,
 	u8 *channel_mapping;
 	int rc;
 
+#ifdef CONFIG_ARCH_MSM8996
+	return __q6asm_media_format_block_pcm_v3(ac, rate, channels,
+						 bits_per_sample, stream_id,
+						 use_default_chmap, channel_map,
+						 sample_word_size);
+#endif
+
 	if (channels > PCM_FORMAT_MAX_NUM_CHANNEL) {
 		pr_err("%s: Invalid channel count %d\n", __func__, channels);
 		return -EINVAL;
@@ -6154,6 +6161,12 @@ static int __q6asm_media_format_block_multi_ch_pcm_v4(struct audio_client *ac,
 	struct asm_multi_channel_pcm_fmt_blk_param_v4 fmt;
 	u8 *channel_mapping;
 	int rc;
+
+#ifdef CONFIG_ARCH_MSM8996
+	return __q6asm_media_format_block_multi_ch_pcm_v3(ac, rate, channels,
+							  use_default_chmap, channel_map,
+							  bits_per_sample, sample_word_size);
+#endif
 
 	if (channels > PCM_FORMAT_MAX_NUM_CHANNEL) {
 		pr_err("%s: Invalid channel count %d\n", __func__, channels);
